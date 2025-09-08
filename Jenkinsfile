@@ -18,6 +18,11 @@ pipeline {
                 sh 'mvn test'
             }
         }
+        stage('Deploy') {
+            steps {
+                sh 'cp target/myapp.war /path/to/tomcat/webapps/'
+            }
+        }
     }
 
     post {
