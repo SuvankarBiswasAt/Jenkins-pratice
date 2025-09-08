@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven3'   // name configured in Global Tool Configuration
-        jdk 'JDK11'      // name configured in Global Tool Configuration
+        maven 'Maven3'   // name from Jenkins Global Tool Configuration
+        jdk 'JDK11'      // name from Jenkins Global Tool Configuration
     }
 
     stages {
@@ -25,20 +25,11 @@ pipeline {
                 sh 'mvn test'
             }
         }
-
-        stage('Package') {
-            steps {
-                sh 'mvn package'
-            }
-        }
     }
 
     post {
-        success {
-            echo 'Build successful!'
-        }
-        failure {
-            echo 'Build failed!'
+        always {
+            echo 'Pipeline finished!'
         }
     }
 }
