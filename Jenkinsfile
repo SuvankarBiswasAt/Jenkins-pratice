@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'cp target/myapp.war /path/to/tomcat/webapps/'
+                sh 'cp target/User.war /usr/local/tomcat/webapps/'
             }
         }
     }
