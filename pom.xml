@@ -6,12 +6,12 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.5.5</version> 
-		<packaging>war</packaging>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.shiv.user</groupId>
 	<artifactId>User</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>User</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
