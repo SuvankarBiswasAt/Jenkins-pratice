@@ -25,16 +25,18 @@ pipeline {
                     def warFile = sh(script: "find target -type f -name '*.war' | head -n 1", returnStdout: true).trim()
                     if (!warFile) {
                         error "No WAR file found!"
+                    }else{
+                        echo "${warFile}"
                     }
 
                     // Find Tomcat webapps directory
-                    def webappsDir = sh(script: "find / -type d -name 'webapps' 2>/dev/null | head -n 1", returnStdout: true).trim()
-                    if (!webappsDir) {
-                        error "Tomcat webapps folder not found!"
-                    }
+                    // def webappsDir = sh(script: "find / -type d -name 'webapps' 2>/dev/null | head -n 1", returnStdout: true).trim()
+                    // if (!webappsDir) {
+                    //     error "Tomcat webapps folder not found!"
+                    // }
 
                     // Copy WAR into Tomcat
-                    sh "cp ${warFile} ${webappsDir}/"
+                    sh "cp ${warFile} tomcat:/usr/local/tomcat/webapps/"
 
                     echo "✅ Deployed ${warFile} to ${webappsDir}"
                 }
