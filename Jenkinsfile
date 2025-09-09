@@ -18,9 +18,26 @@ pipeline {
                 sh 'mvn test'
             }
         }
-        stage('Deploy') {
+        stage('Deploy to Tomcat') {
             steps {
-                sh 'cp target/User.war /usr/local/tomcat/webapps/'
+                script {
+                    // Find the WAR file
+                    def warFile = sh(script: "find target -type f -name '*.war' | head -n 1", returnStdout: true).trim()
+                    if (!warFile) {
+                        error "No WAR file found!"
+                    }
+
+                    // Find Tomcat webapps directory
+                    def webappsDir = sh(script: "find / -type d -name 'webapps' 2>/dev/null | head -n 1", returnStdout: true).trim()
+                    if (!webappsDir) {
+                        error "Tomcat webapps folder not found!"
+                    }
+
+                    // Copy WAR into Tomcat
+                    sh "cp ${warFile} ${webappsDir}/"
+
+                    echo "✅ Deployed ${warFile} to ${webappsDir}"
+                }
             }
         }
     }
