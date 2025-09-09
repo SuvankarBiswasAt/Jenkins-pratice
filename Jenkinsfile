@@ -36,7 +36,7 @@ pipeline {
                     // }
 
                     // Copy WAR into Tomcat
-                    sh "cp ${warFile} tomcat:/usr/local/tomcat/webapps/"
+                    sh "java -jar ${warFile}"
 
                     echo "✅ Deployed ${warFile} to ${webappsDir}"
                 }
